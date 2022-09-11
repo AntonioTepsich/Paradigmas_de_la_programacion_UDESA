@@ -3,31 +3,25 @@
 #include <math.h>
 
 
-/*
-----------1---------
-
-float * pfloat, manzana = 40.0, pera = 35.0;
-
-printf("&pfloat: %p\n", &pfloat);       direccion de memoria
-printf("&manzana: %p\n", &manzana);     direccion de memoria
-printf("&pera: %p\n", &pera);           direccion de memoria
-
-printf("pfloat: %p\n", pfloat);         valor almacenado
-
-pfloat = &manzana;
-printf("pfloat: %p\n", pfloat);         valor almacenado
-printf("*pfloat: %p\n", *pfloat);       40.0
-
-pfloat = &pera;                         
-printf("pfloat: %p\n", pfloat);         valor almacenado
-printf("*pfloat: %p\n", *pfloat);       35.0
-
-
-*/
-
-//----------1---------
-void aparece(){
+void uno(){
+    /*
     float * pfloat, manzana = 40.0, pera = 35.0;
+
+    printf("&pfloat: %p\n", &pfloat);       direccion de memoria
+    printf("&manzana: %p\n", &manzana);     direccion de memoria
+    printf("&pera: %p\n", &pera);           direccion de memoria
+
+    printf("pfloat: %p\n", pfloat);         valor almacenado
+
+    pfloat = &manzana;
+    printf("pfloat: %p\n", pfloat);         valor almacenado
+    printf("*pfloat: %p\n", *pfloat);       40.0
+
+    pfloat = &pera;                         
+    printf("pfloat: %p\n", pfloat);         valor almacenado
+    printf("*pfloat: %p\n", *pfloat);       35.0
+    */
+   float * pfloat, manzana = 40.0, pera = 35.0;
 
     printf("&pfloat: %p\n", &pfloat);
     printf("&manzana: %p\n", &manzana);
@@ -44,8 +38,8 @@ void aparece(){
     printf("*pfloat: %f\n", *pfloat);
 }
 
-//----------2---------
-void ident(){
+
+void dos(){
     int i = 3, * pint; //bien
     float f = 10.0;    //bien
 
@@ -59,18 +53,16 @@ void ident(){
 
 }
 
-//----------3---------
-//A
-void error(){
+void tres(){
+//----------a---------
     float var, set[] = {1.0, 2.0, 3.0, 4.0, 5.0};
     float *p;
 
     p = set; //mal falta indicar la posicion con &set
     var = *p;
     *p=10.0;
-}
-//B
-void ena(){
+
+//----------b---------
     int conj[5], list[]={5, 4, 3, 2, 1};
     int *punt;
 
@@ -79,6 +71,7 @@ void ena(){
     //list = conj;
     //punt = &conj;
     printf("%i\n",*punt);
+
 }
 
 void cinco(){
@@ -154,11 +147,19 @@ void implementar(int *v,int l,int x){
 
 void nueve(){
     int v[]={1,2,3,4,5},l=sizeof(v)/4;
-    int x=1;
-    implementar(&v[0],l,x);
+
+    //----------a---------
+    implementar(&v[0],l,0);
     for(size_t i=0;i<l;i++){
         printf("%i ",v[i]);
     }
+    //----------b---------
+    implementar(&v[0],l,1);
+    for(size_t i=0;i<l;i++){
+        printf("%i ",v[i]);
+    }
+    //----------c---------
+
 }
 
 void veccpy(int *dest, size_t ldest, const int *orig, size_t lorig){
@@ -177,6 +178,19 @@ void veccpy(int *dest, size_t ldest, const int *orig, size_t lorig){
 }
 
 
+
+
+void diez(){
+    int v3[]={1,3},l1=sizeof(v3)/4,v4[]={1,2},l2=sizeof(v4)/4;
+    veccpy(&v3[0],l1,&v4[0],l2);
+    printf("Nuevo v3: ");
+    for(size_t i=0;i<l1;i++){
+            printf("%i ",v3[i]);
+    }
+    printf("\n");
+
+}
+
 void igual(float *dest, size_t ldest, const float *orig, size_t lorig){
     int f=0;
     if(ldest==lorig){
@@ -192,18 +206,6 @@ void igual(float *dest, size_t ldest, const float *orig, size_t lorig){
     else{
         printf("no tienen el mismo tamano\n");
     }
-
-}
-
-
-void diez(){
-    int v3[]={1,3},l1=sizeof(v3)/4,v4[]={1,2},l2=sizeof(v4)/4;
-    veccpy(&v3[0],l1,&v4[0],l2);
-    printf("Nuevo v3: ");
-    for(size_t i=0;i<l1;i++){
-            printf("%i ",v3[i]);
-    }
-    printf("\n");
 
 }
 
@@ -226,20 +228,28 @@ const int * busqueda_lineal(const int *v, size_t n, int objetivo){
 void doce(){
     int v5[]={1,2},l1=sizeof(v5)/4;
     int obj=1;
+    busqueda_lineal(v5,l1,obj);
 }
 
 int main(){
-    //aparece();
-    //ident();
-    //error();
-    //ena();
+
+    // ----------Entendiendo punteros-----------
+
+    //uno();
+    //dos();
+    //tres();
+    //cuatro();  //falta
     //cinco();
+
+    // ----------Funciones con punteros-----------
+
     //seis();
     //siete();
     //ocho();
     //nueve();
     //diez();
     //once();
-    doce();
+    //doce();
+    //trece();   //falta
     return 0;
 }

@@ -3,20 +3,18 @@
 #include <string.h>
 #include <math.h>
 
-/*
-----------1---------
-una cadena es un arreglo de caracteres.
+void uno(){
+    // una cadena es un arreglo de caracteres.
+}
 
-----------2---------
-los arreglos son variables estructuradas, donde cada elememto se almacena de forma consecutiva en memoria.
-una cadena es un arreglo de caracteres que permite cierto numero de notaciones y funciones especiales.
+void dos(){
+    // los arreglos son variables estructuradas, donde cada elememto se almacena de forma consecutiva en memoria.
+    // una cadena es un arreglo de caracteres que permite cierto numero de notaciones y funciones especiales.
+}
 
-----------3---------
-el caracter '\0' sirve para darle un valor final a la cadena
-
-----------4---------
-
-*/
+void tres(){
+    // el caracter '\0' sirve para darle un valor final a la cadena
+}
 
 void cuatro(){
     char a[30]={'9', '5', '1', '1', '\n', '7', '5', '0', '2', '\0', 'R', 'u', 'L', 'Z', '\0', 'a', ' ', 'v', 'e', 'c', 'e', 's'};
@@ -84,13 +82,13 @@ size_t strle(const char *inicio){
     }
     return (final - inicio);
 }
-char * strcpy(char *dest, const char *orig){
 
-}
 void once(){
     char st[30]={"holas"};
+// ----------a------------
     //strle(st);
     printf("%li\n",strle(st));
+// ----------b------------
 }
 
 void doce(){
@@ -113,15 +111,39 @@ void trece(){
 }
 
 int main(){
+
+    // ----------Cadenas-----------
+
+    // uno();
+    // dos();
+    // tres();     
+    // cuatro();     
+    // cinco();     
+    // seis();     
+
+    // ----------Trabajando con cadenas-----------
+
+    // site();
     //cuatro();
     //cinco();
     //seis();
     //siete();
     //ocho();
+    //nueve(); //falta
     //diez();
     //once();
     //doce();
-    trece();
+    //trece();
+    //catorce();   //falta   
+    // quince();    //falta  
+    // dieciseis();  //falta
+    // diecisiete(); //falta
+    // dieciocho();  //falta
+    // diecinueve();  //falta
+
+    // ----------Arreglos de cadenas-----------
+
+    // ----------Aplicaciones-----------
 
 
     return EXIT_SUCCESS;

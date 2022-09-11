@@ -78,9 +78,25 @@ void tres(){
 }
 
 int main(){
-    uno();
+
+    // ----------Funciones con cadenas-----------
+
+    //uno();
     //dos();
     //tres();
+    // cuatro();    //falta    
+    // cinco();    //falta    
+    // seis();    //falta
+    //cuatro();   //falta
+    //cinco();   //falta
+    //seis();   //falta
+    //siete();   //falta
+    //ocho();   //falta
+    //nueve(); //falta
+    //diez();   //falta
+
+    // ----------Funciones con vectores y matrices-----------
+
 
     return EXIT_SUCCESS;
 }
