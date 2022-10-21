@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 void uno(){
     //--------a----------
@@ -110,6 +111,26 @@ void seis(){
     std::cout<<"minimo: "<<min<<std::endl;
 }
 
+void raiz(float a,float b,float c){
+    float uno=(-b+sqrt(pow(b,2)-4*a*c))/(2*a);
+    float dos=(-b-sqrt(pow(b,2)-4*a*c))/(2*a);
+    
+    std::cout<<"Las raices son: "<<uno<<" y "<<dos<<std::endl;
+}
+
+void siete(){
+    //--------a----------
+    raiz(1,4,3);
+    //--------b----------
+    raiz(1,2,1);
+    //--------c----------
+    raiz(1,1,1);
+}
+
+void ocho(){
+    
+}
+
 void nueve(){
     char c = 'A';
     int i = 3, j = 1, m = 0;
@@ -124,7 +145,9 @@ void nueve(){
     //std::cout << "(j / m) || q = " << ((j / m) || q) << std::endl;
 }
 
+void diez(){
 
+}
 
 int main(){
 
@@ -134,9 +157,14 @@ int main(){
     // cuatro();
     // cinco();
     // seis();
-    // siete(); //falta
-    // ocho(); //falta
+    // siete(); 
+    ocho(); 
     // nueve();
+    // diez();
+    // once();
+    // doce();
+    // trece();
+    // catorce();
 
 
     return 0;

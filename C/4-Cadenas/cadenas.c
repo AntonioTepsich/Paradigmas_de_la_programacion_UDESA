@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <math.h>
 
 void uno(){
@@ -107,7 +108,26 @@ void invertir(char *pal){
 }
 void trece(){
     char a[]="anto";
-    invertir(&a);
+    invertir(a);
+}
+
+bool es_palindroma(char *cadena){
+    int i,n=strlen(cadena);
+    char *inv=cadena;
+    for(int i=0;i<n;i++){
+        inv[i]=cadena[n-i];
+    }
+    printf("%s\n",inv);
+    for(i=0;i<n;i++){
+        if(strcmp(cadena,inv)!=0) return false;
+    }
+    return true;
+}
+void catorce(){
+    char v1[]="neuques";
+    bool a=es_palindroma(v1);
+    if(a==true) printf("%s es capicua\n",v1);
+    else printf("%s no es capicua\n",v1);
 }
 
 int main(){
@@ -123,18 +143,14 @@ int main(){
 
     // ----------Trabajando con cadenas-----------
 
-    // site();
-    //cuatro();
-    //cinco();
-    //seis();
     //siete();
     //ocho();
-    //nueve(); //falta
+    //nueve(); //no lo dimos
     //diez();
     //once();
     //doce();
     //trece();
-    //catorce();   //falta   
+    catorce();   //falta   
     // quince();    //falta  
     // dieciseis();  //falta
     // diecisiete(); //falta

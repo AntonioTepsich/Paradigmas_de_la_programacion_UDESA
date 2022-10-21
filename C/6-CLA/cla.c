@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <stdbool.h>
 
 
 void uno(){
@@ -105,21 +106,22 @@ typedef enum {
     DIV,
     SUM,
     RES,
-} arg_t;
+} argu_t;
 
 
-static const char *valid_args[] = {
+static const char *valid_arg[] = {
     [PROD] = "*",
     [DIV] = "/",
     [SUM] = "+",
     [RES] = "-",
 };
 
+
 void doce(int argc,char *argv[]){
     int j=0,arg;
     for(int i=1;i<argc;i++){
-        for(arg=0;sizeof(valid_args)/sizeof(valid_args[0]);arg++){
-            if(!strcmp(argv[i],valid_args[arg])){
+        for(arg=0;sizeof(valid_arg)/sizeof(valid_arg[0]);arg++){
+            if(!strcmp(argv[i],valid_arg[arg])){
                 break;
             }
         }
@@ -138,7 +140,213 @@ void doce(int argc,char *argv[]){
     printf("%d\n",j);
 }
  
- 
+typedef enum {
+    COM,
+    FIN,
+    CANT,
+    HELP,
+} arg_t;
+
+
+static const char *valid_args[] = {
+    [COM] = "-a",
+    [FIN] = "-b",
+    [CANT] = "-n",
+    [HELP] = "-h",
+};
+
+void trece(int argc,char *argv[]){
+    int i,arg;
+    char *ptr=NULL;
+    double com,fin,cant;
+    bool _com,_fin,_cant,_help;
+    _com=_fin=_cant=_help=false;
+
+    if(argc==2 || argc==7){
+
+        for(i=1;i<argc;i++){
+            for(arg=0;arg<sizeof(valid_args)/sizeof(valid_args[0]);arg++){
+                if(!strcmp(argv[i],valid_args[arg])){
+                    break;
+                }
+            }
+            switch (arg){
+                case COM:
+                    i++;
+                    com=strtod(argv[i],&ptr);
+                    if ('\0' != *ptr) {
+                        _com=false;
+                    }
+                    else _com=true;
+                    break;
+                case FIN:
+                    i++;
+                    fin=strtod(argv[i],&ptr);
+                    if ('\0' != *ptr) {
+                        _fin=false;
+                    }
+                    else _fin=true;
+                    break;
+                case CANT:
+                    i++;
+                    cant=strtod(argv[i],&ptr);
+                    if ('\0' != *ptr) {
+                        _cant=false;
+                    }
+                    else _cant=true;
+                    break;
+
+                case HELP:
+                    i++;
+                    _help=true;
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+        if(_com==_fin==_cant==true && _help==false){
+            srand48(time(NULL));
+            float numero;
+            for(int m=0;m<cant;m++){
+                numero=drand48()*(fin-com)+com;
+                printf("%f\n",numero);
+            }
+        }
+
+        else if(_help==true && _com==_fin==_cant==false){
+            printf("NOMBRE\n    %s, sampler - genera lotes de números pseudo-aleatorios\n\nSINOPSIS\n   %s [-a A] [-b B] [-n N] [-h]\n\nDESCRIPCIÓN\n   Generar un lote de N números pseudo-aleatorios en el intervalo\n    [A,B). La distribución muestreada es U[A,B).\n\nOPCIONES\n  h\n     muestra esta ayuda.\n   a A\n       comienzo del intervalo. Valor por omisión: 0.0.\n   b B\n       fin del intervalo. Valor por omisión: 1.0.\n    n N\n       cantidad de muestras a tomar. Valor por omisión: 100.\n\nAUTORES\n  Antonio Tepsich\nLICENCIA\n GNU General Public License v3.0",argv[0],argv[0]);
+        }
+
+        else{
+            puts("ERROR");
+        }
+    }
+
+    else{
+        puts("ERROR");
+    }
+}
+
+
+typedef enum {
+    ALFA,
+    AMP,
+    FREC,
+    START,
+    END,
+    POINTS,
+    HELP2,
+} argumentos_t;
+
+
+static const char *valid_argumentos[] = {
+    [ALFA] = "-alfa",
+    [AMP] = "-amp",
+    [FREC] = "-frec",
+    [START] = "-start",
+    [END] = "-end",
+    [POINTS] = "-points",
+    [HELP2] = "-H",
+};
+
+void quince(int argc, char *argv[]){
+    int i,arg;
+    char *ptra=NULL;
+    double alfa,amp,frec,start,end,points;
+    bool _alfa,_amp,_frec,_start,_end,_points,_help;
+    _alfa=_amp=_frec=_start=_end=_points=false;
+
+    if(argc==2 || argc==13){
+
+        for(i=1;i<argc;i++){
+            for(arg=0;arg<sizeof(valid_argumentos)/sizeof(valid_argumentos[0]);arg++){
+                if(!strcmp(argv[i],valid_argumentos[arg])){
+                    break;
+                }
+            }
+            switch (arg){
+                case ALFA:
+                    i++;
+                    alfa=strtod(argv[i],&ptra);
+                    if ('\0' != *ptra) {
+                        _alfa=false;
+                    }
+                    else _alfa=true;
+                    break;
+                case AMP:
+                    i++;
+                    amp=strtod(argv[i],&ptra);
+                    if ('\0' != *ptra) {
+                        _amp=false;
+                    }
+                    else _amp=true;
+                    break;
+                case FREC:
+                    i++;
+                    frec=strtod(argv[i],&ptra);
+                    if ('\0' != *ptra) {
+                        _frec=false;
+                    }
+                    else _frec=true;
+                    break;
+                case START:
+                    i++;
+                    start=strtod(argv[i],&ptra);
+                    if ('\0' != *ptra) {
+                        _start=false;
+                    }
+                    else _start=true;
+                    break;
+                case END:
+                    i++;
+                    end=strtod(argv[i],&ptra);
+                    if ('\0' != *ptra) {
+                        _end=false;
+                    }
+                    else _end=true;
+                    break;
+                case POINTS:
+                    i++;
+                    points=strtod(argv[i],&ptra);
+                    if ('\0' != *ptra) {
+                        _points=false;
+                    }
+                    else _points=true;
+                    break;
+
+                case HELP2:
+                    i++;
+                    _help=true;
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+        if(_alfa==_amp==_frec==_start==_end==_points==true && _help==false){
+            srand48(time(NULL));
+            float numero,calc;
+            for(int m=0;m<points;m++){
+                numero=drand48()*(end-start)+start;
+                calc=exp(-alfa*numero)*amp*cos(2*M_PI*frec*numero);
+                printf("%f      %f\n",numero,calc);
+            }
+        }
+
+        else if(_help==true && _alfa==_amp==_frec==_start==_end==_points==false){
+            printf("NOMBRE\n    %s, sampler - genera lotes de números pseudo-aleatorios\n\nSINOPSIS\n   %s [-a A] [-b B] [-n N] [-h]\n\nDESCRIPCIÓN\n   Generar un lote de N números pseudo-aleatorios en el intervalo\n    [A,B). La distribución muestreada es U[A,B).\n\nOPCIONES\n  h\n     muestra esta ayuda.\n   a A\n       comienzo del intervalo. Valor por omisión: 0.0.\n   b B\n       fin del intervalo. Valor por omisión: 1.0.\n    n N\n       cantidad de muestras a tomar. Valor por omisión: 100.\n\nAUTORES\n  Antonio Tepsich\nLICENCIA\n GNU General Public License v3.0",argv[0],argv[0]);
+        }
+
+        else{
+            puts("ERROR");
+        }
+    }
+
+    else{
+        puts("ERROR");
+    }
+}
 
 int main(int argc, char *argv[]){
 
@@ -156,9 +364,13 @@ int main(int argc, char *argv[]){
     // nueve(argv[1],argv[2],argv[3]);
     // diez(argc,argv);   //no lo dimos
     // once(argc,argv);   //no lo dimos
-    // char *argv[]={"./cla" , "-3", "2", "+", "*",NULL};
-    // int argc=5;
-    doce(argc,argv);
+    // doce(argc,argv);
+
+    // ----------Argumentos no-posicionales-----------
+
+    // trece(argc,argv);   
+    // catorce(argc,argv);   //no lo dimos
+    // quince(argc,argv);    //revisar con -h  
 
     return EXIT_SUCCESS;
 }
