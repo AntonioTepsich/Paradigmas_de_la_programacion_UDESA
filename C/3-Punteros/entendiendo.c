@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdbool.h>
 
 
 void uno(){
@@ -27,14 +28,24 @@ void uno(){
     printf("&manzana: %p\n", &manzana);
     printf("&pera: %p\n", &pera);
 
+    printf("\n");
+
     printf("pfloat: %p\n", pfloat);
+
+    printf("\n");
 
     pfloat = &manzana;
     printf("pfloat: %p\n", pfloat);
     printf("*pfloat: %f\n", *pfloat);
 
+    printf("\n");
+
     pfloat = &pera;
     printf("pfloat: %p\n", pfloat);
+
+    printf("\n");
+
+    pera=80.00;
     printf("*pfloat: %f\n", *pfloat);
 }
 
@@ -55,12 +66,12 @@ void dos(){
 
 void tres(){
 //----------a---------
-    float var, set[] = {1.0, 2.0, 3.0, 4.0, 5.0};
-    float *p;
+    float va, set[] = {1.0, 2.0, 3.0, 4.0, 5.0};
+    float *s;
 
-    p = set; //mal falta indicar la posicion con &set
-    var = *p;
-    *p=10.0;
+    s = set; //mal falta indicar la posicion con &set
+    va = *s;
+    *s=10.0;
 
 //----------b---------
     int conj[5], list[]={5, 4, 3, 2, 1};
@@ -70,9 +81,42 @@ void tres(){
     //conj= punt;
     //list = conj;
     //punt = &conj;
-    printf("%i\n",*punt);
+    // printf("%i\n",*punt);
 
+//----------c---------
+    int *pint, arrayint[5];
+    float *pfloat, arrayfloat[5];
+
+    pint = arrayint; 
+    pfloat = arrayfloat;
+    pint += 1;  
+    pfloat += 1;
+    pint++;
+    pfloat++;
+    pint -= 1;
+    pfloat -=1;
+    // printf("%i\n",*pint);
+
+//----------d---------
+    int *p, a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    int var;
+    p = a;
+    // *p = 33;
+    var = *p;
+    var = *(p+1);
+    var = *(p+3);
+    var = *(p++);
+    var = *p++;
+    var = *(++p);
+    var = *++p;
+    var = ++*p;
+    var = (*p)++;
+    var = ++(*p);
+    var = *p+1;
+    // printf("%i\n",var);
 }
+
 
 void cinco(){
     int matriz[3][4] = { { 1, 2, 3, 4}, { 5, 6, 7, 8}, { 9,10,11,12} };
@@ -82,7 +126,7 @@ void cinco(){
     ptr=&matriz[0][0];
     for(fila=0;fila<3;fila++){
         for(col=0;col<4;col++){
-            printf("%i ",*(ptr+fila*3+col));
+            printf("%i ",*(ptr+fila*4+col));
         }
         printf("\n");
     }
@@ -112,11 +156,14 @@ void producto(int a, int b, float *prod){
 void division(float a, float b, double *div){
     *div=a/b;
 }
+void modd(int a,int b, long int *mod){
+    *mod=a%b;
+}
 void siete(){
-    long int sum,res;
+    long int sum,res,mod;
     float prod;
     double div;
-    int a=1,b=2;
+    int a=5,b=3;
     suma(a,b,&sum);
     printf("%li\n",sum);
     resta(a,b,&res);
@@ -125,6 +172,8 @@ void siete(){
     printf("%f\n",prod);
     division(a,b,&div);
     printf("%f\n",div);
+    modd(a,b,&mod);
+    printf("%li\n",mod);
 }
 
 void a_hms(int segundos,int *h,int *m, int *s){
@@ -191,7 +240,7 @@ void diez(){
 
 }
 
-void igual(float *dest, size_t ldest, const float *orig, size_t lorig){
+void igual(int *dest, size_t ldest, const int *orig, size_t lorig){
     int f=0;
     if(ldest==lorig){
         for(int i=0;i<lorig;i++){
@@ -215,41 +264,68 @@ void once(){
 
 }
 
-const int * busqueda_lineal(const int *v, size_t n, int objetivo){
-    int f=0;
-    for(size_t i=0;n<n;i++){
-        if(v[0]==objetivo){
-            return 0;
+const int * busqueda_lineall(const int *v, size_t n, int objetivo){
+    for(size_t i=0;i<n;i++){
+        if(v[i]==objetivo){
+            return &v[i];
         }
     }
-    return 1;
+    return NULL; 
+}
+
+bool busqueda_lineal(int * v, size_t n, int objetivo, int **resultado){
+    printf("entrada\n");
+    for(size_t i=0;i<n;i++){
+        printf("%li\n",i);
+        if(v[i]==objetivo){
+            resultado=&v;
+            return true;
+        }
+    }
+    return false;
+}
+
+void prueba(){
+    int *resultado=NULL, *v=NULL,objetivo=4,a[]={3,4,5,6,7},b[]={4,5,6,7};
+    v=&b[0];
+    printf("entrada\n");
+    busqueda_lineal(v,sizeof(b)/sizeof(b[0]),objetivo,resultado);
+    printf("salida\n");
+    printf("%p",resultado[0]);
 }
 
 void doce(){
     int v5[]={1,2},l1=sizeof(v5)/4;
     int obj=1;
-    busqueda_lineal(v5,l1,obj);
+    int *a;
+    a[0]=*busqueda_lineall(v5,l1,obj);
+    busqueda_lineall(v5,l1,2);
+    printf("%i",*a);
 }
 
 int main(){
 
     // ----------Entendiendo punteros-----------
 
-    //uno();
+    // uno();
     //dos();
-    //tres();
-    //cuatro();  //falta
-    //cinco();
+    // tres();
+    // cuatro();  //falta
+    // cinco();
 
     // ----------Funciones con punteros-----------
 
-    //seis();
-    //siete();
+    // seis();
+    // siete();
     //ocho();
     //nueve();
     //diez();
     //once();
-    //doce();
+    // doce();
     //trece();   //falta
+
+
+    prueba();
+
     return 0;
 }

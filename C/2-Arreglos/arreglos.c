@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include <math.h>
 
 void uno(){
     /*
@@ -13,51 +14,48 @@ void uno(){
     */
 }
 
-void ceros(){
-    int a[15]={0};
-    for (size_t i = 0; i < 15; ++i) {
+void PrintInt(int a[],int n){
+    for (size_t i = 0; i < n; ++i) {
         printf("%i\n",a[i]); 
     }
 }
-void tres(){
-    double a[7]={0};
-    for (size_t i = 0; i < 7; ++i) {
-        a[i]=3.0;
-        printf("%.1f\n",a[i]); 
-    }
-}
-#define SIZE 7
-void tamano(){
-    float a[SIZE]={0};
-    printf("%li\n",sizeof(a)/sizeof(float)); 
-    
-}
-void cuatroi(){
-    int a[4]={3,2,0,9};
-    for (size_t i = 0; i < 4; ++i) {
+void PrintDouble(double a[],int n){
+    for (size_t i = 0; i < n; ++i) {
         printf("%i\n",a[i]); 
     }
 }
-void cuatroc(){
-    char a[4]={'h','o','l','a'};
-    for (size_t i = 0; i < 4; ++i) {
-        printf("%c\n",a[i]); 
+void PrintFloat(float a[],int n){
+    for (size_t i = 0; i < n; ++i) {
+        printf("%i\n",a[i]); 
     }
 }
-void cuatrog(){
-    int a[4]={104, 111, 108, 97};
-    for (size_t i = 0; i < 4; ++i) {
+void PrintChar(char a[],int n){
+    for (size_t i = 0; i < n; ++i) {
         printf("%i\n",a[i]); 
     }
 }
 
+void sumar(int a[],int n){
+    int sum=0;
+    for(size_t i=0;i<n;i++){
+        sum+=a[i];
+    }
+    printf("%i",sum);
+}
+#define SIZE 7
+
 void dos(){
-    ceros(15); //a
-    //tres(); //b
-    //tamano(); //c
-    //cuatroi(); //d
-    //cuatroc(); //e
-    //cuatrog(); //f
+    int a[15]={0};
+    double b[7];
+    for(size_t i=0;i<7;i++){
+        b[i]=3.0;
+    }
+    float c[SIZE]={0};
+    int d[4]={3,2,0,9};
+    char e[4]={'h','o','l','a'};
+    int f[4]={104, 111, 108, 97};
+
+    sumar(d,4);
 }
 
 void ceros_10(){
@@ -193,7 +191,7 @@ void dieciocho(){
     int c[3][3]={0, 1, 2, 3, 10, 11,12,4,8};
 
     // ----------a------------
-    traza(c,3);
+    dieciochosub(c,3);
 
 }
 
@@ -207,7 +205,7 @@ void veintesub(int c[][20], int w){
     }
 }
 
-void veinte(int c[][20], int w){
+void veinte(){
     int c[7][20]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0,1,1,1,0,0,1,1,1,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0,0,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0,0,0,1,0,1,0,0,0,1,0,0,0,1,1,1,0};
     int x=20;
     veintesub(c,x);
@@ -355,7 +353,29 @@ void veinticinco(){
     }
 }
 
+void print(int a[][3],int f){
+    for(size_t i=0;i<f;i++){
+        for(size_t j=0;j<3;j++){
+            a[i][j]=j;
+        }
+    }
+    for(size_t i=0;i<f;i++){
+        for(size_t j=0;j<3;j++){
+            printf("%i, ",a[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void extra(){
+    int a[2][3];
+    print(a,2);
+}
+
 int main(void){
+
+    extra();
+
     // ----------Arreglos-----------
 
     // uno();
