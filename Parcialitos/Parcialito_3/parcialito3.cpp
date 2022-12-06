@@ -6,8 +6,6 @@ class Habitacion{
         float precioBase_,adXCama_;
         int cantCamas_;
         bool mascotas_,fumar_,libre_;
-    Habitacion();
-    ~Habitacion();
 
     float getPrecio() {
         float x=precioBase_+adXCama_*cantCamas_;

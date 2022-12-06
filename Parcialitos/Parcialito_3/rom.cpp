@@ -108,9 +108,54 @@ void cuatro(){
     delete n1,n2,n3,n4,aux;
 }
 
+#include <iostream>
+
+struct A {
+    A() { std::cout << "A\n"; }
+    virtual ~A() { std::cout << "~A\n"; }
+};
+
+
+struct B {
+    B() { std::cout << "B\n"; }
+    virtual ~B() { std::cout << "~B\n"; }
+};
+
+
+struct DA : public A {
+    DA() { std::cout << "DA\n"; }
+    ~DA() { std::cout << "~DA\n"; }
+};
+
+struct DDA : public DA {
+    DDA() { std::cout << "DDA\n"; }
+    ~DDA() { std::cout << "~DDA\n"; }
+};
+
+
+struct DB : public B {
+    DB() { std::cout << "DB\n"; }
+    ~DB() { std::cout << "~DB\n"; }
+};
+
+
+void cinco(void)
+{
+    A *a = new DDA();
+    B *b = new DB();
+
+    delete a;
+    delete b;
+
+    std::cout << "Me parece que faltÃ³ destruir algo...\n";
+
+}
+
+
 
 int main(){
     // tres();
-    cuatro();
+    // cuatro();
+    cinco();
     return 0;
 }
