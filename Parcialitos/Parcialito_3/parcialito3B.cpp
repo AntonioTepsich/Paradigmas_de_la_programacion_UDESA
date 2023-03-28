@@ -6,11 +6,16 @@ class Habitacion{
         float precioBase_,adXCama_;
         int cantCamas_;
         bool mascotas_,fumar_,libre_;
-    Habitacion();
-    ~Habitacion();
+
+    float getPrecioBase(){
+        return precioBase_;
+    }
+    float getAdd(){
+        return adXCama_;
+    }
 
     float getPrecio() {
-        float x=precioBase_+adXCama_*cantCamas_;
+        float x=precioBase_+(adXCama_*cantCamas_);
         return x;
     }
     int getCapacidad() const {
@@ -39,7 +44,6 @@ class Suite: public Habitacion{
             fumar_=false;
             libre_=true;
         }
-        ~Suite();
 };
 class Premium: public Habitacion{
     public:
@@ -51,7 +55,6 @@ class Premium: public Habitacion{
             fumar_=false;
             libre_=true;
         }
-        ~Premium();
 };
 class Mega: public Habitacion{
     public:
@@ -63,7 +66,6 @@ class Mega: public Habitacion{
             fumar_=true;
             libre_=true;
         }
-        ~Mega();
 };
 
 
@@ -85,6 +87,7 @@ class Reserva{
             for(const auto h:habs_){
                 precio+=h->getPrecio();
             }
+            return precio;
         }
 };
 
@@ -97,6 +100,14 @@ class Hotel{
         Hotel(std::vector<Habitacion *>habTotal){
             habTotal_=habTotal;
         }
+        ~Hotel(){
+            for(auto h:habTotal_){
+                delete []h;
+            }
+            for(auto r:resTotal_){
+                delete []r;
+            }
+        }
 
         std::vector<Habitacion*> habsLibres(int capMin){
             std::vector<Habitacion*> habLibre;
@@ -105,8 +116,9 @@ class Hotel{
                     habLibre.emplace_back(h);
                 }
             }
+            // std::cout<<habLibre.at(0)->getPrecio()<<std::endl;
             Habitacion* aux;
-            for(const auto i:habLibre){
+            for(size_t i=0;i<habLibre.size()-1;i++){
                 for (size_t j=0;j<habLibre.size()-1;j++){
                     if(habLibre.at(j)->getPrecio()<(habLibre.at(j+1)->getPrecio())){
                         aux=habLibre.at(j);
@@ -115,8 +127,78 @@ class Hotel{
                     }
                 }
             }
-
             return habLibre;
+            delete aux;
         }
+        void print(std::vector<Habitacion*> a){
+            for(const auto s:a){
+                std::cout<<s->getPrecio()<<std::endl;
+            }
+        }
+
+        void reservar(std::string cod,std::vector<Habitacion*> habs){
+            Reserva *r= new Reserva(cod,habs);
+            resTotal_.emplace_back(r);
+            for(auto h:habs){
+                h->ocuparHab();
+            }
+        }
+        
 };
 
+void uno(){
+    Habitacion *a1= new Suite(100,5,5); 
+    Habitacion *a2= new Premium(200,10,5); 
+    Habitacion *a3= new Mega(300,15,5); 
+
+    std::vector<Habitacion *>a={a1,a2,a3};
+
+    Hotel *h= new Hotel(a);
+    h->print(h->habsLibres(5));
+    
+    for(auto s:a){
+        delete s;
+    }
+    delete a1,a2,a3,a,h;
+
+
+}
+
+struct A
+{
+    std::string n_;
+    A(std::string n){
+        n_=n;
+        std::cout<<"A("+n_+")\n";
+    }
+    ~A(){
+        std::cout<<"~A("+n_+")\n";
+    }
+
+    A(const A&a){
+        n_="copy of "+a.n_;
+        std::cout<<"A("+n_+")\n";
+    }
+    const A& operator=(const A&a){
+        n_="eq to "+a.n_;
+        std::cout<<"A("+n_+")\n";
+        return *this;
+    }
+};
+
+void PrintName(A a){
+    std::cout<<a.n_<<std::endl;
+}
+
+
+void dos(){
+    A *a=new A("class A");
+    PrintName(*a);
+    delete a;
+}
+
+int main(){
+    uno();
+    // dos();
+    return 0;
+}
