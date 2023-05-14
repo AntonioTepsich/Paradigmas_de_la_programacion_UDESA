@@ -137,7 +137,7 @@ int *crear_vector(size_t n)
 {
     return calloc(n, sizeof(int));
 }
-#if 0
+
 int *crear_vector2(size_t n)
 {
     int *v;
@@ -171,4 +171,3 @@ status_t crear_vector3(int **v, size_t n)
 
     return ST_OK;
 }
-#endif
